@@ -1,0 +1,66 @@
+<section>
+  <div class="mt-5">
+    <h1 class="text-center">Sign In</h1>
+    <div class="d-flex justify-content-center align-items-center h-100">
+      <div class="card" style="width: 500px;">
+        <div class="card-body">
+
+          @if (hasErrors) {
+            <div class="alert alert-danger">
+              {{errorMessage}}
+            </div>
+          }
+
+          <form [formGroup]="signInForm" class="needs-validation" [class.was-validated]="isFormSubmitted">
+            <div class="mb-3">
+              <label for="userEmail" class="form-label">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                placeholder="Email"
+                formControlName="userEmail"
+                required>
+              @if (signInForm.controls['userEmail'].errors && signInForm.controls['userEmail'].errors['required']) {
+                <div class="invalid-feedback">
+                  Email field cannot be empty.
+                </div>
+              }
+              @if (signInForm.controls['userEmail'].errors && signInForm.controls['userEmail'].errors['pattern']) {
+              <div class="invalid-feedback">
+                Email format not valid.
+              </div>
+              }
+            </div>
+            <div class="mb-3">
+              <label for="userPassword" class="form-label">Password</label>
+              <input type="password" class="form-control" placeholder="Password" formControlName="userPassword" required>
+              @if (signInForm.controls['userPassword'].errors && signInForm.controls['userPassword'].errors['required'])
+              {
+              <div class="invalid-feedback">
+                Password field cannot be empty.
+              </div>
+              }
+            </div>
+
+            <div class="d-flex flex-column align-items-center justify-content-between gap-2">
+              <button type="button" class="btn btn-primary w-100" (click)="signIn()">Log in</button>
+              <p class="m-0">Or</p>
+              <button type="button" class="btn btn-secondary w-100" (click)="googleSignIn()">Log in with
+                Google</button>
+            </div>
+
+            <hr>
+
+            <div class="d-flex flex-column align-items-center justify-content-between gap-2">
+              <button type="button" class="btn btn-outline-primary w-100" [routerLink]="['/forgot-password']">Forgot
+                Password?</button>
+              <p class="m-0">Don't have an account?</p>
+              <button type="button" class="btn btn-outline-primary w-100" [routerLink]="['/register-user']"> Sign
+                Up</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,27 @@
+<section>
+  <div class="my-5">
+    <h1 class="text-center">Dashboard</h1>
+    @if (authService.afAuth.authState | async; as user) {
+      <div class="card">
+        <div class="card-header">
+          <h2 class="text-center">User Profile</h2>
+        </div>
+        <div class="card-body">
+          <div class="media">
+            <img class="align-self-start mr-5 img-thumbnail rounded-circle" src="{{(user.photoURL) ? user.photoURL : '/assets/dummy-user.png'}}"
+              alt="{{user.displayName}}">
+            <div class="media-body">
+              <h1>Hello: <strong>{{(user.displayName) ? user.displayName : 'User'}}</strong></h1>
+              <p>User ID: <strong>{{user.uid}}</strong></p>
+              <p>Email: <strong>{{user.email}}</strong></p>
+              <p>Email Verified: <strong>{{user.emailVerified}}</strong></p>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button type="button" class="btn btn-primary w-100" (click)="authService.signOut()">Log Out</button>
+        </div>
+      </div>
+    }
+  </div>
+</section>

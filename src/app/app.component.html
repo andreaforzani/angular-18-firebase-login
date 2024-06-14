@@ -1,0 +1,11 @@
+<div>
+  @if (authService.isLoggedIn) {
+    <main class="main-container container-fluid">
+      <router-outlet></router-outlet>
+    </main>
+  } @else {
+    <main class="main-container container-fluid not-logged">
+      <router-outlet></router-outlet>
+    </main>
+  }
+</div>
