@@ -37,6 +37,9 @@ export class SignUpComponent {
     this.isFormSubmitted = true;
     if (this.signUpForm.valid) {
       this.authService.signUp(this.userEmail!.value, this.userPassword!.value).then((response) => {
+        // console.log('signUp response: ' + response);
+        this.authService.sendVerificationMail();
+        this.authService.setUserData(response.user);
         this.errorMessage = "";
         this.hasErrors = false;
       }).catch((error) => {
@@ -49,6 +52,8 @@ export class SignUpComponent {
 
   googleSignUp() {
     this.authService.googleAuth().then((response) => {
+      // console.log('googleAuth response: ' + response);
+      this.authService.setUserData(response.user);
       this.errorMessage = "";
       this.hasErrors = false;
     }).catch((error) => {

@@ -48,15 +48,15 @@ export class AuthService {
   signIn(email: string, password: string) {
     console.log("signIn");
     return this.afAuth
-      .signInWithEmailAndPassword(email, password)
-      .then((result) => {
-        this.setUserData(result.user);
-        this.afAuth.authState.subscribe((user) => {
-          if (user) {
-            this.router.navigate(['dashboard']);
-          }
-        });
-      });
+      .signInWithEmailAndPassword(email, password);
+      // .then((result) => {
+      //   this.setUserData(result.user);
+      //   this.afAuth.authState.subscribe((user) => {
+      //     if (user) {
+      //       this.router.navigate(['dashboard']);
+      //     }
+      //   });
+      // });
       // .catch((error) => {
       //   // console.log(error);
       //   // return error;
@@ -71,17 +71,16 @@ export class AuthService {
   // Sign up with email/password
   signUp(email: string, password: string) {
     console.log("signUp");
-    return this.afAuth
-      .createUserWithEmailAndPassword(email, password)
-      .then((result) => {
-        /* Call the SendVerificaitonMail() function when new user sign
-        up and returns promise */
-        this.sendVerificationMail();
-        this.setUserData(result.user);
-      });
-      // .catch((error) => {
-      //   window.alert(error.message);
+    return this.afAuth.createUserWithEmailAndPassword(email, password);
+      // .then((result) => {
+      //   /* Call the SendVerificaitonMail() function when new user sign
+      //   up and returns promise */
+      //   this.sendVerificationMail();
+      //   this.setUserData(result.user);
       // });
+      // // .catch((error) => {
+      // //   window.alert(error.message);
+      // // });
   }
 
   // Send email verfificaiton when new user sign up
@@ -136,20 +135,19 @@ export class AuthService {
   // Auth logic to run auth providers
   authLogin(provider: any) {
     console.log("authLogin");
-    return this.afAuth
-      .signInWithPopup(provider)
-      .then((result) => {
-        this.setUserData(result.user);
-        // this.router.navigate(['/dashboard'])
-        // .then(nav => {
-        //   console.log(nav); // true if navigation is successful
-        // }, err => {
-        //   console.log(err) // when there's an error
-        // });
-      })
-      .catch((error) => {
-        window.alert(error);
-      });
+    return this.afAuth.signInWithPopup(provider);
+      // .then((result) => {
+      //   this.setUserData(result.user);
+      //   // this.router.navigate(['/dashboard'])
+      //   // .then(nav => {
+      //   //   console.log(nav); // true if navigation is successful
+      //   // }, err => {
+      //   //   console.log(err) // when there's an error
+      //   // });
+      // })
+      // .catch((error) => {
+      //   window.alert(error);
+      // });
   }
 
   // Sign in with Google

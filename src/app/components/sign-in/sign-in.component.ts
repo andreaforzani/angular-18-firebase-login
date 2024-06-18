@@ -40,6 +40,7 @@ export class SignInComponent {
     if (this.signInForm.valid) {
       this.authService.signIn(this.userEmail!.value, this.userPassword!.value).then((response) => {
         // console.log(response);
+        this.authService.setUserData(response.user);
         this.errorMessage = "";
         this.hasErrors = false;
       }).catch((error) => {
@@ -52,6 +53,7 @@ export class SignInComponent {
 
   googleSignIn() {
     this.authService.googleAuth().then((response) => {
+      this.authService.setUserData(response.user);
       this.errorMessage = "";
       this.hasErrors = false;
     }).catch((error) => {
